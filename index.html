@@ -1,261 +1,411 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mukkara Vishnu Sekhar Reddy — Author</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mukkara Vishnu Sekhar Reddy — Author Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root{
-      --bg:#07060a;
-      --card:#0f0d13;
-      --accent:#d9b25a; /* golden accent */
-      --muted:#9b98a1;
-      --glass: rgba(255,255,255,0.03);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(217,178,90,0.03), transparent),
-                 radial-gradient(1000px 500px at 90% 90%, rgba(120,120,140,0.02), transparent),
-                 var(--bg);
-      color:#eee;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0e0e0e;
+      color: #f0f0f0;
     }
 
-    /* Page layout */
-    .wrap{width:100%;max-width:1200px;margin:0 auto;}
-    header{
-      position:fixed;left:0;right:0;top:18px;z-index:60;display:flex;justify-content:center;pointer-events:none
-    }
-    .nav{pointer-events:auto;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter: blur(6px);padding:10px 18px;border-radius:14px;display:flex;gap:18px;align-items:center}
-    .brand{font-family:Cinzel, serif;font-weight:700;color:var(--accent);letter-spacing:1px}
-    .tag{font-size:12px;color:var(--muted);}
-
-    /* Section basics */
-    section{min-height:100vh;padding:120px 20px 80px;position:relative;display:flex;align-items:center}
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center}
-
-    /* Hero card */
-    .hero-left{max-width:700px}
-    h1{font-family:Cinzel, serif;font-size:48px;margin:0 0 8px;line-height:1.02}
-    .lead{font-size:18px;color:var(--muted);margin-bottom:18px}
-    .cta{display:flex;gap:12px;align-items:center}
-    .btn{background:transparent;border:1px solid rgba(217,178,90,0.18);padding:10px 16px;border-radius:10px;color:var(--accent);cursor:pointer;text-decoration:none}
-    .btn.primary{background:linear-gradient(90deg, rgba(217,178,90,0.12), rgba(217,178,90,0.06));border:1px solid rgba(217,178,90,0.35)}
-
-    /* Parallax preview card */
-    .cover-preview{position:relative;height:520px;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);display:flex;align-items:center;justify-content:center}
-    .cover{width:72%;height:80%;background:#111;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
-    .cover img{max-width:100%;max-height:100%;display:block}
-
-    /* About */
-    .about-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:28px;border-radius:14px;box-shadow:0 14px 30px rgba(0,0,0,0.5)}
-    .about-grid{display:grid;grid-template-columns:1fr 360px;gap:32px;align-items:center}
-    .author-photo{height:260px;border-radius:12px;background:linear-gradient(180deg, rgba(217,178,90,0.06), rgba(217,178,90,0.02));display:flex;align-items:center;justify-content:center;color:var(--muted)}
-
-    /* Books */
-    .books-list{display:flex;flex-direction:column;gap:22px}
-    .book{display:flex;gap:18px;align-items:center;padding:18px;border-radius:12px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)}
-    .book-cover{width:120px;height:170px;border-radius:6px;background:#111;overflow:hidden;display:flex;align-items:center;justify-content:center}
-    .book-meta h3{margin:0;color:var(--accent);font-family:Cinzel,serif}
-    .book-meta p{margin:6px 0 0;color:var(--muted)}
-
-    /* Quotes */
-    .quote-card{padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02);max-width:900px}
-    .quote{font-style:italic;font-size:20px;color:#fff}
-
-    /* Contact */
-    .contact{display:flex;flex-direction:column;gap:12px}
-    .small{font-size:13px;color:var(--muted)}
-
-    footer{padding:28px;text-align:center;color:var(--muted)}
-
-    /* responsive */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;}
-      .hero-left{order:2}
-      .cover-preview{order:1;height:420px}
-      .about-grid{grid-template-columns:1fr}
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background-color: #181818;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #ccc;
+      margin-left: 30px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #c45d27;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 80px;
+      background: linear-gradient(135deg, #1a1a1a, #121212);
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      color: #fff;
+      margin: 10px 0;
+    }
+
+    .hero-text h3 {
+      color: #c45d27;
+      font-weight: 400;
+    }
+
+    .hero-text p {
+      color: #ccc;
+      line-height: 1.7;
+    }
+
+    .hero-text a.read-more {
+      color: #c45d27;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .social-icons {
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      color: #fff;
+      background: #c45d27;
+      margin-right: 10px;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      background: #fff;
+      color: #c45d27;
+    }
+
+    .hero img {
+      width: 320px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+
+    /* Books Section */
+    .books-section {
+      padding: 60px 80px;
+      text-align: center;
+      background-color: #121212;
+    }
+
+    .books-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: #fff;
+      margin-bottom: 40px;
+    }
+
+    .book-gallery {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 60px;
+      flex-wrap: wrap;
+      position: relative;
+      transition: 0.3s ease;
+    }
+
+    .book-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .book {
+      width: 200px;
+      background: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      overflow: hidden;
+      transition: transform 0.3s, opacity 0.3s;
+      z-index: 2;
+    }
+
+    .book img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      filter: brightness(0.9);
+    }
+
+    .book-title {
+      padding: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    .buy-btn {
+      display: inline-block;
+      margin: 0 0 12px 12px;
+      background-color: #c45d27;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+
+    .buy-btn:hover {
+      background-color: #fff;
+      color: #c45d27;
+    }
+
+    .book-description {
+      position: absolute;
+      left: 230px;
+      top: 0;
+      width: 300px;
+      background: #1b1b1b;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+      color: #ddd;
+    }
+
+    .book-item:hover .book-description {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .book-gallery:hover .book-item {
+      opacity: 0.2;
+      transform: scale(0.95);
+    }
+
+    .book-gallery .book-item:hover {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+      z-index: 3;
+    }
+
+    .book-gallery .book-item:hover .book {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 900px) {
+      .book-gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .book-item {
+        flex-direction: column;
+      }
+
+      .book-description {
+        position: static;
+        width: 90%;
+        margin-top: 15px;
+        opacity: 1;
+        transform: translateY(0);
+        box-shadow: none;
+        background: none;
+        text-align: center;
+      }
+
+      .book-gallery:hover .book-item {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* Quote Section */
+    #quote {
+      background-color: #181818;
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    #quote h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: #c45d27;
+      margin-bottom: 20px;
+    }
+
+    #quote p {
+      color: #ccc;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: #121212;
+      text-align: center;
+      padding: 60px 80px;
+    }
+
+    #contact h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      color: #fff;
+      margin-bottom: 25px;
+    }
+
+    #contact p {
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .contact-links {
+      margin-top: 25px;
+    }
+
+    .contact-links a {
+      display: inline-block;
+      margin: 8px 15px;
+      padding: 10px 18px;
+      border-radius: 25px;
+      background-color: #c45d27;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .contact-links a:hover {
+      background-color: #fff;
+      color: #c45d27;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      background-color: #181818;
+      font-size: 14px;
+      border-top: 1px solid #333;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .hero img {
+        margin-top: 30px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="nav wrap">
-      <div style="display:flex;flex-direction:column">
-        <div class="brand">Mukkara Vishnu Sekhar Reddy</div>
-        <div class="tag">Author of <em>Asuryan</em></div>
-      </div>
-    </div>
+    <div class="logo"></div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#books">My Books</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <main>
-
-    <!-- HERO -->
-    <section class="hero" id="hero">
-      <div class="wrap hero-left">
-        <div class="eyebrow small">New Release</div>
-        <h1>Mukkara Vishnu Sekhar Reddy</h1>
-        <p class="lead">I’m Vishnu Sekhar Reddy, an author driven by imagination and emotion. Through my stories, I explore the depths of human nature, blending myth, mystery, and meaning to create worlds that stay with readers long after the last page.</p>
-
-        <div class="cta">
-          <a class="btn primary" href="https://amzn.in/d/aKh9loE" target="_blank" rel="noopener">Buy <em>Asuryan</em> on Amazon</a>
-          <a class="btn" href="#books">See Book</a>
-        </div>
-
-        <div style="margin-top:28px;color:var(--muted);max-width:640px">Writing, for me, is not an art — it’s a heartbeat that refuses to fade.</div>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Hi, I'm Vishnu Sekhar Reddy Mukkara</h1>
+      <h3>Author</h3>
+      <p>I’m Mukkara Vishnu Sekhar Reddy, a writer who believes that stories are not just words — they’re echoes of the soul. Through my work, I explore the spaces where myth meets emotion, where imagination breathes life into timeless truths. My writing often blends fantasy, philosophy, and human emotion, creating worlds that feel ancient yet deeply personal. I aim to craft tales that make readers feel, reflect, and remember — stories that linger long after the last page</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
       </div>
+    </div>
+    <img src="author.webp" alt="Author Photo">
+  </section>
 
-      <div class="wrap cover-preview" aria-hidden="true">
-        <div class="parallax-layer" data-speed="0.18" style="position:absolute;inset:0;background-image:radial-gradient(circle at 10% 20%, rgba(217,178,90,0.06), transparent);"></div>
-        <div class="parallax-layer" data-speed="0.28" style="position:absolute;inset:0;background-image:radial-gradient(circle at 90% 80%, rgba(120,120,160,0.03), transparent);"></div>
-
-        <div class="cover" id="bookCover">
-          <!-- Placeholder image. Replace with your actual book cover image file later -->
-          <img src="coverpage.png" alt="Asuryan cover" style="width:100%;height:100%;object-fit:cover"/>
+  <section id="books" class="books-section">
+    <h2>Read My Books</h2>
+    <div class="book-gallery">
+      <div class="book-item">
+        <div class="book">
+          <img src="coverpage.png" alt="Asuryan Book">
+          <div class="book-title">Asuryan</div>
+          <a class="buy-btn" href="https://amzn.in/d/aKh9loE" target="_blank">
+            <i class="fa-brands fa-amazon"></i> Buy on Amazon
+          </a>
         </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="wrap about-card">
-        <div class="about-grid">
-          <div>
-            <h2 style="font-family:Cinzel, serif;">About the Author</h2>
-            <p style="color:var(--muted);">I write myth-inspired fiction with an emotional core — stories that blend epic scale and intimate human stakes. My debut (and current) book, <em>Asuryan</em>, is available on Amazon.</p>
-
-            <p style="margin-top:18px;color:var(--muted);">My writing explores memory, morality, and the small choices that become legends. I invite you to read, question, and travel with me into the places where myth meets the human heart.</p>
-
-            <div style="margin-top:18px;display:flex;gap:12px">
-              <a class="btn" href="#contact">Contact</a>
-              <a class="btn" href="https://amzn.in/d/aKh9loE" target="_blank" rel="noopener">Buy Asuryan</a>
-            </div>
-          </div>
-
-          <div>
-            <div class="author-photo">
-              <!-- Replace placeholder with your real photo later -->
-              <img src="author.png" style="width:100%;height:180%;object-fit:cover;border-radius:8px">
-            </div>
-          </div>
+        <div class="book-description">
+          <h4>Asuryan</h4>
+          <p>A gripping mythological fantasy that bridges divine power and human destiny. Asuryan takes you into a world of gods, mortals, and moral conflicts — a journey of light versus darkness and the choices that define us.</p>
         </div>
       </div>
-    </section>
 
-    <!-- BOOKS -->
-    <section id="books">
-      <div class="wrap">
-        <h2 style="font-family:Cinzel, serif;">Books</h2>
-        <div style="height:18px"></div>
-
-        <div class="books-list">
-          <article class="book">
-            <div class="book-cover">
-              <img src="coverpage.png" alt="Asuryan cover" style="width:100%;height:100%;object-fit:cover">
-            </div>
-            <div class="book-meta">
-              <h3>Asuryan</h3>
-              <p class="small">An evocative mythic tale that weaves together destiny, memory and the cost of power — a novel for readers who love epic emotion.</p>
-              <div style="margin-top:12px">
-                <a class="btn primary" href="https://amzn.in/d/aKh9loE" target="_blank" rel="noopener">Buy on Amazon</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Add more .book elements here for future titles -->
+      <div class="book-item">
+        <div class="book">
+          <img src="https://via.placeholder.com/200x280?text=Coming+Soon" alt="Book 2">
+          <div class="book-title">Untitled — Coming Soon</div>
+          <a class="buy-btn" href="#" target="_blank">
+            <i class="fa-brands fa-amazon"></i> Buy on Amazon
+          </a>
+        </div>
+        <div class="book-description">
+          <h4>Coming Soon</h4>
+          <p>This upcoming novel explores the thin line between love, fate, and betrayal — a tale that connects all the emotions in a breathtaking journey.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- QUOTE / GALLERY -->
-    <section id="quotes">
-      <div class="wrap">
-        <div class="quote-card">
-          <div class="quote">“Writing, for me, is not an art — it’s a heartbeat that refuses to fade.”</div>
-          <div style="margin-top:14px;color:var(--muted)">— Mukkara Vishnu Sekhar Reddy</div>
-        </div>
-      </div>
-    </section>
+  <section id="quote">
+    <h2>Author’s Quote</h2>
+    <p style="font-size:20px; font-style:italic; max-width:800px; margin:auto; line-height:1.8;">
+      “Writing, for me, is not an art — it’s a heartbeat that refuses to fade.”
+    </p>
+    <p style="margin-top:15px; font-weight:600; color:#c45d27;">— Mukkara Vishnu Sekhar Reddy</p>
+  </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="wrap">
-        <h2 style="font-family:Cinzel, serif;">Contact</h2>
-        <p class="small">I’ll add social links soon — for now you can reach me at:</p>
-        <div style="height:12px"></div>
-        <div class="contact">
-          <div class="about-card">Email: <strong>vishnusekhar3825@gmail.com</strong></div>
-          <div class="about-card">Interested in reviews, collaborations, or events? Drop a message — I’ll respond personally.</div>
-        </div>
-      </div>
-    </section>
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>If you’d like to connect, collaborate, or share your thoughts about my books, feel free to reach out!</p>
+    <div class="contact-links">
+      <a href="mailto:mukkaravishnusekharreddy@gmail.com"><i class="fa-solid fa-envelope"></i> Email Me</a>
+      <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+    </div>
+  </section>
 
-    <footer>
-      <div class="wrap small">© <span id="year"></span> Mukkara Vishnu Sekhar Reddy — All rights reserved</div>
-    </footer>
-
-  </main>
+  <footer>
+    © <span id="year"></span> Mukkara Vishnu Sekhar Reddy — All Rights Reserved
+  </footer>
 
   <script>
-    // fill year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Simple parallax for cover preview based on scroll
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Parallax layers (data-speed attributes)
-    document.querySelectorAll('.parallax-layer').forEach(layer =>{
-      const speed = parseFloat(layer.dataset.speed) || 0.2;
-      gsap.to(layer, {
-        y: () => (window.innerHeight * speed * -0.35),
-        ease: 'none',
-        scrollTrigger:{
-          trigger: '#hero',
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
-        }
-      });
-    });
-
-    // Subtle scale/tilt on the cover
-    gsap.to('#bookCover',{
-      scale:1.04,rotation:-1,transformOrigin:'50% 50%',y:20,
-      scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:1}
-    });
-
-    // Sections animation
-    gsap.utils.toArray('section').forEach(section=>{
-      gsap.from(section.querySelectorAll('h2, h1, p, .book, .quote-card, .about-card'),{
-        y: 40,opacity:0,duration:0.8,stagger:0.06,ease:'power3.out',
-        scrollTrigger:{trigger:section,start:'top 80%'}
-      });
-    });
-
-    // Smooth subtle up-down float for hero cover
-    gsap.to('#bookCover',{y:'+=10',repeat:-1,yoyo:true,ease:'sine.inOut',duration:3});
-
-    // Make hero CTA buttons float slightly on hover
-    document.querySelectorAll('.btn').forEach(b=>{
-      b.addEventListener('mouseenter',()=>gsap.to(b,{y:-4,duration:0.18}));
-      b.addEventListener('mouseleave',()=>gsap.to(b,{y:0,duration:0.18}));
-    });
-
   </script>
-
 </body>
 </html>
