@@ -4,327 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mukkara Vishnu Sekhar Reddy — Author Portfolio</title>
+  
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #0e0e0e;
-      color: #f0f0f0;
-    }
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 60px;
-      background-color: #181818;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: #fff;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #ccc;
-      margin-left: 30px;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #c45d27;
-    }
-
-    .hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 60px 80px;
-      background: linear-gradient(135deg, #1a1a1a, #121212);
-    }
-
-    .hero-text {
-      max-width: 600px;
-    }
-
-    .hero-text h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 42px;
-      color: #fff;
-      margin: 10px 0;
-    }
-
-    .hero-text h3 {
-      color: #c45d27;
-      font-weight: 400;
-    }
-
-    .hero-text p {
-      color: #ccc;
-      line-height: 1.7;
-    }
-
-    .hero-text a.read-more {
-      color: #c45d27;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .social-icons {
-      margin-top: 20px;
-    }
-
-    .social-icons a {
-      color: #fff;
-      background: #c45d27;
-      margin-right: 10px;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
-    }
-
-    .social-icons a:hover {
-      background: #fff;
-      color: #c45d27;
-    }
-
-    .hero img {
-      width: 320px;
-      height: 320px;
-      object-fit: cover;
-      border-radius: 6px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-    }
-
-    /* Books Section */
-    .books-section {
-      padding: 60px 80px;
-      text-align: center;
-      background-color: #121212;
-    }
-
-    .books-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px;
-      color: #fff;
-      margin-bottom: 40px;
-    }
-
-    .book-gallery {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 60px;
-      flex-wrap: wrap;
-      position: relative;
-      transition: 0.3s ease;
-    }
-
-    .book-item {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: all 0.3s ease;
-    }
-
-    .book {
-      width: 200px;
-      background: #1e1e1e;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      overflow: hidden;
-      transition: transform 0.3s, opacity 0.3s;
-      z-index: 2;
-    }
-
-    .book img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      filter: brightness(0.9);
-    }
-
-    .book-title {
-      padding: 12px;
-      font-weight: 600;
-      font-size: 15px;
-      color: #fff;
-    }
-
-    .buy-btn {
-      display: inline-block;
-      margin: 0 0 12px 12px;
-      background-color: #c45d27;
-      color: #fff;
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-size: 13px;
-      transition: 0.3s;
-    }
-
-    .buy-btn:hover {
-      background-color: #fff;
-      color: #c45d27;
-    }
-
-    .book-description {
-      position: absolute;
-      left: 230px;
-      top: 0;
-      width: 300px;
-      background: #1b1b1b;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      padding: 20px;
-      border-radius: 8px;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.3s ease;
-      pointer-events: none;
-      z-index: 1;
-      color: #ddd;
-    }
-
-    .book-item:hover .book-description {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: all;
-    }
-
-    .book-gallery:hover .book-item {
-      opacity: 0.2;
-      transform: scale(0.95);
-    }
-
-    .book-gallery .book-item:hover {
-      opacity: 1 !important;
-      transform: scale(1) !important;
-      z-index: 3;
-    }
-
-    .book-gallery .book-item:hover .book {
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 900px) {
-      .book-gallery {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .book-item {
-        flex-direction: column;
-      }
-
-      .book-description {
-        position: static;
-        width: 90%;
-        margin-top: 15px;
-        opacity: 1;
-        transform: translateY(0);
-        box-shadow: none;
-        background: none;
-        text-align: center;
-      }
-
-      .book-gallery:hover .book-item {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    /* Quote Section */
-    #quote {
-      background-color: #181818;
-      text-align: center;
-      padding: 60px 40px;
-    }
-
-    #quote h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px;
-      color: #c45d27;
-      margin-bottom: 20px;
-    }
-
-    #quote p {
-      color: #ccc;
-    }
-
-    /* Contact Section */
-    #contact {
-      background: #121212;
-      text-align: center;
-      padding: 60px 80px;
-    }
-
-    #contact h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px;
-      color: #fff;
-      margin-bottom: 25px;
-    }
-
-    #contact p {
-      font-size: 16px;
-      color: #ccc;
-    }
-
-    .contact-links {
-      margin-top: 25px;
-    }
-
-    .contact-links a {
-      display: inline-block;
-      margin: 8px 15px;
-      padding: 10px 18px;
-      border-radius: 25px;
-      background-color: #c45d27;
-      color: #fff;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .contact-links a:hover {
-      background-color: #fff;
-      color: #c45d27;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #777;
-      background-color: #181818;
-      font-size: 14px;
-      border-top: 1px solid #333;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 40px 20px;
-      }
-      .hero img {
-        margin-top: 30px;
-      }
-    }
-  </style>
+  <!-- Google Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mukkara Vishnu Sekhar Reddy",
+    "jobTitle": "Author",
+    "url": "https://vishnu3825.github.io/author-portfolio/",
+    "image": "https://vishnu3825.github.io/author-portfolio/author.jpeg",
+    "sameAs": [
+      "https://www.amazon.com/author/mvsrwrites_3825"
+  }
+  </script>
 </head>
 <body>
   <header>
@@ -340,14 +40,9 @@
     <div class="hero-text">
       <h1>Hi, I'm Vishnu Sekhar Reddy Mukkara</h1>
       <h3>Author</h3>
-      <p>I’m Mukkara Vishnu Sekhar Reddy, a writer who believes that stories are not just words — they’re echoes of the soul. Through my work, I explore the spaces where myth meets emotion, where imagination breathes life into timeless truths. My writing often blends fantasy, philosophy, and human emotion, creating worlds that feel ancient yet deeply personal. I aim to craft tales that make readers feel, reflect, and remember — stories that linger long after the last page</p>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-      </div>
+      <p>I’m Mukkara Vishnu Sekhar Reddy, a writer who believes that stories are not just words — they’re echoes of the soul. Through my work, I explore the spaces where myth meets emotion, where imagination breathes life into timeless truths. My writing often blends fantasy, philosophy, and human emotion, creating worlds that feel ancient yet deeply personal. I aim to craft tales that make readers feel, reflect, and remember — stories that linger long after the last page.</p>
     </div>
-    <img src="author.webp" alt="Author Photo">
+    <img src="author.jpeg" alt="Author Photo">
   </section>
 
   <section id="books" class="books-section">
@@ -369,10 +64,10 @@
 
       <div class="book-item">
         <div class="book">
-          <img src="https://via.placeholder.com/200x280?text=Coming+Soon" alt="Book 2">
-          <div class="book-title">Untitled — Coming Soon</div>
-          <a class="buy-btn" href="#" target="_blank">
-            <i class="fa-brands fa-amazon"></i> Buy on Amazon
+          <img src="coverpage 2.jpg" alt="Book 2">
+          <div class="book-tittle">A Tale of two loves </div>
+          <a class="buy-btn" href="" target="_blank">
+            <i class="fa-brands fa-amazon"></i> coimng soon
           </a>
         </div>
         <div class="book-description">
@@ -385,18 +80,18 @@
 
   <section id="quote">
     <h2>Author’s Quote</h2>
-    <p style="font-size:20px; font-style:italic; max-width:800px; margin:auto; line-height:1.8;">
+    <p class="quote-text">
       “Writing, for me, is not an art — it’s a heartbeat that refuses to fade.”
     </p>
-    <p style="margin-top:15px; font-weight:600; color:#c45d27;">— Mukkara Vishnu Sekhar Reddy</p>
+    <p class="quote-author">— Mukkara Vishnu Sekhar Reddy</p>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
     <p>If you’d like to connect, collaborate, or share your thoughts about my books, feel free to reach out!</p>
     <div class="contact-links">
-      <a href="mailto:m.vishnusekhar@gmail.com"><i class="fa-solid fa-envelope"></i> Email Me</a>
-      <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="mailto:vishnusekhar3825@gmail.com"><i class="fa-solid fa-envelope"></i> Email Me</a>
+      <a href="https://www.facebook.com/profile.php?id=61582531957905"><i class="fab fa-facebook-f"></i>acebook</a>
     </div>
   </section>
 
@@ -404,8 +99,6 @@
     © <span id="year"></span> Mukkara Vishnu Sekhar Reddy — All Rights Reserved
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
